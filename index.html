@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jialie 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --mint: #cfe8e2;
+  --blue: #bfdde7;
+  --cream: #f8f4ea;
+  --beige: #e9e1d4;
+  --white: #ffffff;
+  --ink: #34444a;
+  --ink-soft: rgba(52,68,74,0.72);
+  --shadow: 0 18px 40px rgba(126, 143, 145, 0.14);
+  --bg: #f8f4ea;
+  --txt3: rgba(52,68,74,0.56);
+  --pk3: #7faab4;
+}
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Prompt', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(174, 198, 202, 0.18) 1.2px, transparent 1.3px) 0 0 / 28px 28px,
+    radial-gradient(circle at 18px 18px, rgba(206, 225, 230, 0.16) 1.4px, transparent 1.5px) 0 0 / 36px 36px,
+    linear-gradient(180deg, #fdfbf6 0%, #f6fbfb 42%, #f8f4ea 100%);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(207,232,226,0.55), transparent 24%),
+    radial-gradient(circle at 82% 10%, rgba(191,221,231,0.44), transparent 22%),
+    radial-gradient(circle at 18% 82%, rgba(248,244,234,0.6), transparent 22%),
+    radial-gradient(circle at 84% 78%, rgba(233,225,212,0.45), transparent 24%);
+  z-index: 0;
+}
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 14px;
+}
+.page-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 36px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(248,244,234,0.86));
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.68);
+  box-shadow: var(--shadow);
+}
+.page-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(207,232,226,0.24), transparent 22%),
+    linear-gradient(315deg, rgba(191,221,231,0.18), transparent 26%);
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px dashed rgba(160, 183, 186, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 120;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(207,232,226,0.55));
+  border: 1px solid rgba(191,221,231,0.5);
+  font-size: 12px;
+  color: var(--ink);
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(126, 143, 145, 0.1);
+}
+
+/* Particles */
+#pts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.pt { position: absolute; animation: ptUp linear infinite; opacity: 0; }
+@keyframes ptUp {
+0%   { transform: translateY(105vh); opacity: 0; }
+8%   { opacity: 0.45; }
+92%  { opacity: 0.45; }
+100% { transform: translateY(-15vh); opacity: 0; }
+}
+@keyframes floatGentle {
+0%, 100% { transform: translateY(0px) rotate(-1deg); }
+50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.ham {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 16px;
+  border: 1px solid rgba(191,221,231,0.72);
+  background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(207,232,226,0.58));
+  transition: background .2s, box-shadow .2s;
+  flex-shrink: 0;
+  box-shadow: 0 10px 20px rgba(126, 143, 145, 0.08);
+}
+.ham:hover { transform: translateY(-1px); }
+.ham span {
+  display: block;
+  width: 18px;
+  height: 2.5px;
+  background: linear-gradient(135deg, #6f8e95, #8db9c3);
+  border-radius: 999px;
+  transition: transform .3s, opacity .3s, width .3s;
+}
+.ham.open { box-shadow: 0 10px 24px rgba(126, 143, 145, 0.12); }
+.ham.open span:nth-child(2) { opacity: 0; width: 0; }
+.ham.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+.hero-sub { font-size: 12px; color: rgba(33,65,59,0.72); letter-spacing: 3px; margin-top: 5px; }
+
+.topbar-brand {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(248,244,234,0.88));
+  padding: 8px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(191,221,231,0.58);
+  letter-spacing: 0.2px;
+  box-shadow: 0 10px 24px rgba(126,143,145,0.08);
+}
+.topbar-brand span { color: #7faab4; }
+
+.topbar-right { display: flex; gap: 8px; }
+.tb-link {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink);
+  border: 1px solid rgba(191,221,231,0.65);
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(191,221,231,0.34));
+  transition: transform .2s, box-shadow .2s, background .2s;
+  box-shadow: 0 10px 20px rgba(126, 143, 145, 0.08);
+}
+.tb-link:hover { transform: translateY(-1px); background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(207,232,226,0.5)); box-shadow: 0 14px 28px rgba(126,143,145,0.12); }
+
+/* Drawer */
+.overlay {
+position: fixed; inset: 0; z-index: 200;
+background: rgba(0,0,0,0);
+pointer-events: none;
+transition: background .3s;
+}
+.overlay.open { background: rgba(0,0,0,0.6); pointer-events: all; }
+
+.drawer {
+position: fixed; top: 0; left: 0; z-index: 201;
+width: min(300px, 84vw); height: 100vh;
+background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(248,244,234,0.96));
+border-right: 1px solid rgba(191,221,231,0.52);
+box-shadow: 14px 0 42px rgba(126,143,145,0.14);
+display: flex; flex-direction: column; align-items: center;
+padding: 26px 0 22px;
+transform: translateX(-100%);
+transition: transform .32s cubic-bezier(.4,0,.2,1);
+}
+.drawer.open { transform: translateX(0); }
+
+.dr-av {
+width: 76px; height: 76px; border-radius: 26px;
+background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(207,232,226,0.76));
+border: 1px solid rgba(191,221,231,0.72);
+display: flex; align-items: center; justify-content: center;
+font-size: 28px; margin-bottom: 7px;
+box-shadow: 0 12px 30px rgba(126,143,145,0.12);
+animation: glow 3s ease-in-out infinite;
+}
+@keyframes glow {
+0%,100% { box-shadow: 0 12px 30px rgba(126,143,145,0.12); transform: translateY(0); }
+50%      { box-shadow: 0 18px 34px rgba(126,143,145,0.18); transform: translateY(-2px); }
+}
+.dr-name {
+font-size: 12px; font-weight: 800; color: #7faab4;
+letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px;
+}
+.dr-nav { width: 100%; }
+.dr-a {
+display: flex; align-items: center; gap: 11px;
+padding: 14px 22px;
+color: var(--ink); font-size: 14px; font-weight: 700;
+text-decoration: none; position: relative;
+transition: color .2s, background .2s, transform .2s;
+}
+.dr-a:hover { color: #21413b; background: rgba(207,232,226,0.32); transform: translateX(2px); }
+.dr-a.on {
+color: #21413b;
+background: linear-gradient(90deg, rgba(207,232,226,0.55), rgba(191,221,231,0.1));
+}
+.dr-a.on::before {
+content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+background: linear-gradient(180deg, #9dc8d2, #c9e6df); border-radius: 0 999px 999px 0;
+}
+.dr-a .ico { font-size: 15px; width: 18px; text-align: center; }
+
+.dr-qr {
+margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.qr-sq {
+width: 68px; height: 68px; background: linear-gradient(135deg, #fffefc, #dcecf1);
+border-radius: 18px; border: 1px solid rgba(191,221,231,0.72);
+display: flex; align-items: center; justify-content: center; font-size: 40px;
+}
+.qr-lbl { font-size: 10px; color: var(--ink-soft); font-weight: 800; letter-spacing: 2px; }
+
+/* Hero */
+.hero {
+background: linear-gradient(135deg, rgba(207,232,226,0.46) 0%, rgba(191,221,231,0.34) 40%, rgba(248,244,234,0.96) 100%);
+padding: 26px 16px 22px;
+position: relative;
+min-height: 200px;
+display: flex; align-items: stretch; justify-content: flex-start;
+overflow: hidden;
+}
+.hero::before,
+.hero::after {
+content: '';
+position: absolute;
+border-radius: 28px;
+background: rgba(255,255,255,0.48);
+border: 1px solid rgba(255,255,255,0.55);
+box-shadow: 0 12px 24px rgba(126,143,145,0.08);
+transform: rotate(-7deg);
+}
+.hero::before { width: 72px; height: 24px; top: 22px; right: 22px; }
+.hero::after { width: 58px; height: 20px; bottom: 26px; left: 26px; transform: rotate(10deg); }
+.hero-inner {
+position: relative;
+z-index: 3;
+width: 100%;
+display: flex;
+justify-content: space-between;
+gap: 18px;
+align-items: center;
+}
+.hero-txt { position: relative; flex: 1 1 0; min-width: 0; }
+.hero-tag {
+display: inline-block;
+background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+border: 1px solid rgba(191,221,231,0.52);
+padding: 8px 14px; border-radius: 999px;
+font-size: 12px; color: var(--ink); margin-bottom: 12px;
+}
+.hero-brand {
+display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.hero-art { display: none !important; }
+.hero-logo {
+width: 60px; height: 60px; border-radius: 22px;
+display: flex; align-items: center; justify-content: center;
+background: linear-gradient(135deg, rgba(255,255,255,0.86), rgba(207,232,226,0.74));
+border: 1px solid rgba(191,221,231,0.72);
+box-shadow: 0 16px 34px rgba(126,143,145,0.12);
+backdrop-filter: blur(10px);
+flex-shrink: 0;
+position: relative;
+overflow: hidden;
+}
+.hero-logo::before {
+content: ''; position: absolute; inset: 0;
+background: radial-gradient(circle at 28% 28%, rgba(255,255,255,0.78), transparent 38%), radial-gradient(circle at 72% 72%, rgba(191,221,231,0.42), transparent 42%);
+}
+.hero-logo span {
+position: relative; z-index: 1; font-size: 28px; line-height: 1;
+filter: drop-shadow(0 0 8px rgba(255,255,255,0.7));
+}
+.hero-title {
+font-size: clamp(36px, 8vw, 54px); font-weight: 900; line-height: 1.03;
+background: linear-gradient(135deg, #7faab4 0%, #c6dfe7 40%, #92cdbd 100%);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+filter: drop-shadow(0 10px 18px rgba(126,143,145,0.12));
+}
+.hero-sub { font-size: 12px; color: var(--ink-soft); letter-spacing: 2px; margin-top: 8px; }
+.hero-deco { font-size: 68px; line-height: 1; position: relative; z-index: 2; align-self: flex-end; }
+.hero-visual {
+flex: 0 0 214px;
+width: 214px;
+max-width: 214px;
+margin-left: auto;
+position: relative;
+padding-top: 8px;
+animation: floatGentle 7s ease-in-out infinite;
+}
+.hero-photo-card {
+position: relative;
+aspect-ratio: 4 / 5;
+border-radius: 26px;
+overflow: hidden;
+background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(207,232,226,0.52));
+border: 1px solid rgba(191,221,231,0.72);
+box-shadow: 0 18px 38px rgba(126,143,145,0.14);
+}
+.hero-photo-card img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+.hero-photo-card::before {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(180deg, rgba(255,255,255,0.12), transparent 32%, rgba(52,68,74,0.1));
+pointer-events: none;
+}
+.hero-photo-badge {
+position: absolute;
+left: 14px;
+top: 14px;
+padding: 7px 11px;
+border-radius: 999px;
+background: rgba(255,255,255,0.84);
+border: 1px solid rgba(191,221,231,0.5);
+color: var(--ink);
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 0.2px;
+backdrop-filter: blur(8px);
+}
+.hero-photo-caption {
+position: absolute;
+left: 14px;
+right: 14px;
+bottom: 14px;
+padding: 10px 12px;
+border-radius: 22px;
+background: rgba(255,255,255,0.84);
+border: 1px solid rgba(191,221,231,0.5);
+backdrop-filter: blur(8px);
+color: var(--ink-soft);
+font-size: 11px;
+font-weight: 700;
+line-height: 1.45;
+}
+.hero-decor-row {
+display: flex;
+justify-content: center;
+gap: 8px;
+flex-wrap: wrap;
+margin-top: 10px;
+}
+.hero-deco-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-width: 34px;
+height: 34px;
+padding: 0 11px;
+border-radius: 999px;
+background: rgba(255,255,255,0.9);
+border: 1.5px dashed rgba(162, 189, 191, 0.9);
+box-shadow: 0 10px 22px rgba(126,143,145,0.1);
+backdrop-filter: blur(8px);
+font-size: 13px;
+font-weight: 800;
+color: #6f8e95;
+line-height: 1;
+letter-spacing: 0.5px;
+}
+.hero-deco-btn:nth-child(2n) { transform: translateY(-3px); }
+.hero-deco-btn:nth-child(3n) { transform: translateY(2px); }
+
+.hero-wave {
+width: 100%; height: 32px; overflow: hidden; background: var(--bg); position: relative;
+}
+.hero-wave::before {
+content: ''; position: absolute; bottom: 0; left: 0; right: 0; top: 0;
+background: linear-gradient(135deg, #f8f4ea, #dcecf1, #f8f4ea);
+border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Content */
+.content { max-width: 860px; margin: 0 auto; padding: 24px 28px 50px; }
+
+/* Scroll offset for sticky topbar */
+[id] { scroll-margin-top: 66px; }
+
+.sh {
+display: flex; align-items: center; gap: 10px;
+background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(207,232,226,0.34));
+border: 1px dashed rgba(160,183,186,0.42);
+border-radius: 30px;
+padding: 13px 18px; margin-bottom: 16px;
+box-shadow: 0 12px 28px rgba(126,143,145,0.08);
+}
+.sh .ico { font-size: 18px; }
+.sh h2 { font-size: 15px; font-weight: 800; color: var(--ink); letter-spacing: 0.2px; }
+.sh span { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+.card {
+flex: 1 1 0; min-width: 0;
+background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(248,244,234,0.9));
+border: 1px solid rgba(191,221,231,0.5);
+border-radius: 32px; padding: 18px 16px;
+box-shadow: 0 16px 34px rgba(126,143,145,0.1);
+transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.card:hover { transform: translateY(-5px) rotate(-0.4deg); border-color: rgba(191,221,231,0.8); box-shadow: 0 22px 42px rgba(126,143,145,0.14); }
+.card-link {
+all: unset; display: block; cursor: pointer; color: inherit;
+}
+.card-link .card { height: 100%; cursor: pointer; }
+.card-link:focus-visible { outline: 2px solid rgba(191,221,231,0.8); outline-offset: 4px; border-radius: 32px; }
+.c-ico { font-size: 36px; margin-bottom: 12px; filter: drop-shadow(0 10px 18px rgba(126,143,145,0.14)); }
+.c-ttl { font-size: 15px; font-weight: 900; color: var(--ink); margin-bottom: 6px; }
+.c-dsc { font-size: 12px; color: var(--ink-soft); line-height: 1.7; }
+
+/* Catalog */
+.catalog-note {
+font-size: 12px; color: var(--txt3); margin: -4px 0 18px;
+}
+.category-shell {
+background: rgba(255,255,255,0.72);
+border: 1px solid rgba(191,221,231,0.56);
+border-radius: 34px; padding: 18px; margin-bottom: 18px;
+overflow: hidden;
+box-shadow: 0 14px 30px rgba(126,143,145,0.08);
+}
+.category-shell[open] {
+border-color: rgba(191,221,231,0.84);
+box-shadow: 0 20px 34px rgba(126,143,145,0.12);
+}
+.category-head {
+display: flex; align-items: center; justify-content: space-between; gap: 10px;
+margin-bottom: 0;
+list-style: none;
+cursor: pointer;
+}
+.category-head::-webkit-details-marker { display: none; }
+.category-head h3 { font-size: 15px; font-weight: 900; color: var(--ink); }
+.category-head .cat-meta { display: flex; align-items: center; gap: 10px; }
+.category-head span { font-size: 11px; color: #7faab4; }
+.cat-arrow {
+width: 28px; height: 28px; border-radius: 50%;
+display: inline-flex; align-items: center; justify-content: center;
+background: linear-gradient(135deg, #ffffff, #dcecf1); color: #6f8e95; flex-shrink: 0;
+transition: transform .2s ease;
+}
+.category-shell[open] .cat-arrow { transform: rotate(90deg); }
+.category-body { padding-top: 14px; }
+.product-grid {
+display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch;
+}
+.product-card {
+display: flex; flex-direction: column; overflow: hidden; height: 100%; min-height: 100%;
+background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(248,244,234,0.95));
+border: 1px solid rgba(191,221,231,0.52);
+border-radius: 30px;
+text-decoration: none; color: #21413b;
+box-shadow: 0 14px 30px rgba(126,143,145,0.08);
+transition: transform .22s, border-color .22s, box-shadow .22s;
+animation: floatGentle 7s ease-in-out infinite;
+will-change: transform;
+}
+.product-card:nth-child(3n+2) { animation-delay: -1.4s; }
+.product-card:nth-child(3n+3) { animation-delay: -2.8s; }
+.product-card:hover { transform: translateY(-4px) rotate(-0.2deg); border-color: rgba(191,221,231,0.92); box-shadow: 0 20px 34px rgba(126,143,145,0.12); }
+.prod-thumb {
+position: relative; aspect-ratio: 4 / 3; overflow: hidden;
+background: linear-gradient(135deg, rgba(207,232,226,0.45), rgba(191,221,231,0.18));
+}
+.prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.prod-chip {
+position: absolute; left: 10px; top: 10px; z-index: 2;
+padding: 6px 11px; border-radius: 999px;
+font-size: 10px; font-weight: 900; letter-spacing: 0.4px;
+background: rgba(255,255,255,0.82); backdrop-filter: blur(8px);
+border: 1px solid rgba(191,221,231,0.5); color: var(--ink);
+}
+.prod-body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.prod-name { font-size: 13px; font-weight: 900; color: var(--ink); line-height: 1.45; }
+.prod-price {
+display: inline-flex; align-self: flex-start;
+padding: 5px 10px;
+border-radius: 999px;
+background: linear-gradient(135deg, rgba(207,232,226,0.7), rgba(191,221,231,0.42));
+border: 1px solid rgba(191,221,231,0.74);
+font-size: 12px;
+font-weight: 900;
+color: #6f8e95;
+box-shadow: 0 8px 18px rgba(126,143,145,0.08);
+}
+.prod-desc { font-size: 11px; color: var(--ink-soft); line-height: 1.6; min-height: 34px; }
+.prod-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; }
+.prod-size { font-size: 10px; color: var(--ink-soft); }
+.prod-link { font-size: 11px; font-weight: 900; color: #7faab4; }
+
+/* Box */
+.box {
+background: rgba(255,255,255,0.72);
+border: 1px solid rgba(191,221,231,0.52);
+border-radius: 32px; padding: 20px 22px; margin-bottom: 18px;
+box-shadow: 0 14px 30px rgba(126,143,145,0.08);
+}
+.box-label { font-size: 13px; font-weight: 900; color: #7faab4; margin-bottom: 12px; }
+.badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 7px 13px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.b-n { background: rgba(207,232,226,0.5); border: 1px solid rgba(191,221,231,0.56); color: #6e8c92; }
+.b-u { background: rgba(248,244,234,0.92); border: 1px solid rgba(233,225,212,0.7); color: #7f6e5d; }
+.note { font-size: 11px; color: var(--ink-soft); }
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: 14px; }
+.step { display: flex; gap: 13px; align-items: flex-start; }
+.sn {
+width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+background: linear-gradient(135deg, #cfe8e2, #bfdde7);
+display: flex; align-items: center; justify-content: center;
+font-size: 11px; font-weight: 800;
+box-shadow: 0 8px 18px rgba(126,143,145,0.12);
+}
+.st { font-size: 13px; color: var(--ink-soft); line-height: 1.7; padding-top: 3px; }
+.st strong { color: #7faab4; }
+
+/* Course */
+.course {
+display: flex; align-items: center; gap: 16px;
+background: linear-gradient(135deg, rgba(255,255,255,0.84), rgba(207,232,226,0.3));
+border: 1px solid rgba(191,221,231,0.56);
+border-radius: 32px; padding: 18px 20px; margin-bottom: 18px;
+text-decoration: none; color: var(--ink);
+box-shadow: 0 16px 34px rgba(126,143,145,0.1);
+transition: transform .25s, box-shadow .25s;
+}
+.course:hover { transform: translateY(-3px); box-shadow: 0 22px 38px rgba(126,143,145,0.12); }
+.c-emj { font-size: 36px; flex-shrink: 0; }
+.c-inf { flex: 1; min-width: 0; }
+.c-inf-t { font-size: 13px; font-weight: 900; margin-bottom: 4px; color: var(--ink); }
+.c-inf-d { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+.c-price {
+background: linear-gradient(135deg, #ffffff, #cfe8e2);
+padding: 10px 16px; border-radius: 22px;
+font-size: 16px; font-weight: 900; text-align: center; flex-shrink: 0;
+box-shadow: 0 10px 22px rgba(126,143,145,0.1);
+white-space: nowrap;
+}
+.c-price small { font-size: 10px; display: block; font-weight: 400; opacity: 0.85; }
+
+/* Rules */
+.rules-box {
+background: rgba(255,255,255,0.72);
+border: 1px solid rgba(191,221,231,0.54);
+border-radius: 32px; padding: 18px 22px; margin-bottom: 18px;
+box-shadow: 0 14px 30px rgba(126,143,145,0.08);
+}
+.rule {
+display: flex; gap: 10px; align-items: flex-start;
+padding: 9px 0; border-bottom: 1px solid rgba(191,221,231,0.4);
+font-size: 13px; color: var(--ink-soft); line-height: 1.7;
+}
+.rule:last-child { border-bottom: none; }
+
+.warn {
+display: flex; align-items: flex-start; gap: 10px;
+background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(191,221,231,0.24)); border: 1px solid rgba(191,221,231,0.5);
+border-left: 4px solid #bfdde7; border-radius: 30px;
+padding: 11px 16px; margin-bottom: 18px;
+font-size: 13px; color: var(--ink); line-height: 1.7;
+}
+
+/* Portfolio */
+.port-link {
+display: flex; align-items: center; gap: 14px;
+background: linear-gradient(135deg, rgba(255,255,255,0.84), rgba(248,244,234,0.9));
+border: 1px solid rgba(191,221,231,0.56);
+border-radius: 32px; padding: 16px 20px; margin-bottom: 18px;
+text-decoration: none; color: var(--ink);
+transition: border-color .2s, box-shadow .2s, transform .2s;
+box-shadow: 0 14px 30px rgba(126,143,145,0.08);
+}
+.port-link:hover { border-color: rgba(191,221,231,0.86); box-shadow: 0 20px 34px rgba(126,143,145,0.12); transform: translateY(-2px); }
+.p-ico { font-size: 28px; }
+.p-txt { flex: 1; }
+.p-ttl { font-size: 13px; font-weight: 900; color: var(--ink); margin-bottom: 3px; }
+.p-url { font-size: 11px; color: var(--ink-soft); word-break: break-all; }
+.p-arr { font-size: 18px; color: #7faab4; }
+
+/* Contact */
+.contact-box {
+background: rgba(255,255,255,0.74);
+border: 1px solid rgba(191,221,231,0.54);
+border-radius: 32px; padding: 20px 22px; margin-bottom: 18px;
+box-shadow: 0 14px 30px rgba(126,143,145,0.08);
+}
+.contact-hd { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
+.contact-hd h3 { font-size: 14px; font-weight: 900; color: #7faab4; }
+.ct-link {
+display: flex; align-items: center; gap: 13px;
+padding: 11px 14px;
+background: rgba(255,255,255,0.82); border: 1px solid rgba(191,221,231,0.44);
+border-radius: 22px; text-decoration: none; color: var(--ink);
+font-size: 13px; margin-bottom: 10px;
+transition: background .2s, border-color .2s, transform .2s;
+}
+.ct-link:last-child { margin-bottom: 0; }
+.ct-link:hover { background: rgba(207,232,226,0.34); border-color: rgba(191,221,231,0.72); transform: translateX(4px); }
+.ct-ico { width: 34px; height: 34px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.ct-inf { flex: 1; }
+.ct-t { font-weight: 900; font-size: 13px; color: var(--ink); }
+.ct-u { font-size: 11px; color: var(--ink-soft); margin-top: 1px; word-break: break-all; }
+.ct-arr { color: #7faab4; }
+
+/* Footer */
+.footer {
+background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(207,232,226,0.28)); border-top: 1px solid rgba(191,221,231,0.5);
+padding: 20px 28px;
+display: flex; flex-direction: column; align-items: center; gap: 12px;
+position: relative; z-index: 1;
+}
+.footer-text { font-size: 12px; color: var(--ink-soft); text-align: center; }
+.ft-links { display: flex; gap: 12px; justify-content: center; }
+.ft-a {
+display: flex; align-items: center; gap: 6px;
+padding: 10px 20px; border-radius: 999px;
+border: 1px solid rgba(191,221,231,0.58);
+color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 800;
+background: rgba(255,255,255,0.82);
+transition: all .2s;
+}
+.ft-a:hover { background: rgba(207,232,226,0.34); border-color: rgba(191,221,231,0.84); box-shadow: 0 14px 24px rgba(126,143,145,0.1); }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--pk3); border-radius: 3px; }
+
+@media (max-width: 720px) {
+.page { padding: 8px; }
+.topbar { padding: 8px 9px; min-height: auto; align-items: center; gap: 8px; flex-direction: row; }
+.topbar-left { gap: 6px; flex: 0 0 auto; min-width: 0; }
+.topbar-brand { font-size: 11px; padding: 6px 8px; line-height: 1.05; white-space: nowrap; }
+.topbar-right { gap: 6px; flex-wrap: nowrap; width: auto; flex: 1 1 auto; justify-content: flex-end; overflow: hidden; }
+.tb-link { padding: 6px 8px; font-size: 9px; flex: 0 1 auto; justify-content: center; text-align: center; white-space: nowrap; }
+.tb-link:first-child { min-width: 0; }
+.hero { padding: 12px 10px 10px; min-height: auto; }
+.hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) 94px; gap: 8px; align-items: center; }
+.hero-txt { min-width: 0; }
+.hero-visual { flex: none; width: 94px; max-width: 94px; margin-left: 0; padding-top: 0; }
+.hero-photo-card { border-radius: 14px; aspect-ratio: 3 / 4; }
+.hero-photo-card img { object-position: center top; }
+.hero-photo-badge { left: 7px; top: 7px; padding: 4px 7px; font-size: 8px; }
+.hero-photo-caption { display: none; }
+.hero-decor-row { gap: 5px; margin-top: 6px; }
+.hero-deco-btn { min-width: 22px; height: 22px; padding: 0 6px; font-size: 9px; }
+.hero-title { font-size: clamp(18px, 6.3vw, 24px); line-height: 1.02; }
+.hero-sub { font-size: 8px; letter-spacing: 1px; margin-top: 3px; }
+.hero-deco { font-size: 34px; }
+.hero-brand { gap: 7px; }
+.hero-logo { width: 38px; height: 38px; border-radius: 12px; }
+.hero-logo span { font-size: 18px; }
+.content { padding: 18px 14px 40px; }
+.cards { gap: 8px; }
+.card { border-radius: 22px; padding: 12px 10px; }
+.c-ico { font-size: 24px; margin-bottom: 8px; }
+.c-ttl { font-size: 10px; line-height: 1.35; margin-bottom: 4px; }
+.c-dsc { font-size: 8px; line-height: 1.4; }
+.category-head { align-items: flex-start; flex-direction: column; }
+.category-shell, .box, .rules-box, .contact-box, .course, .port-link, .warn { border-radius: 28px; }
+.product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.product-card { border-radius: 22px; }
+.prod-thumb { aspect-ratio: 1 / 1; }
+.prod-chip { left: 8px; top: 8px; padding: 5px 9px; font-size: 9px; }
+.prod-body { padding: 9px 9px 10px; gap: 5px; }
+.prod-name { font-size: 11px; line-height: 1.3; }
+.prod-price { font-size: 10px; padding: 4px 8px; }
+.prod-desc { font-size: 9px; line-height: 1.45; min-height: 0; }
+.prod-foot { gap: 8px; }
+.prod-size, .prod-link { font-size: 9px; }
+.footer { padding: 18px 14px; }
+}
+
+@media (min-width: 721px) and (max-width: 980px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body>
+<div id="pts"></div>
+
+<div class="page">
+<div class="page-shell">
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="ham" id="hamBtn" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </div>
+    <span class="topbar-brand">Jie<span> ジア・リー </span>₊˚⊹</span>
+  </div>
+  <div class="topbar-right">
+    <a class="tb-link" href="https://www.facebook.com/share/1D23M6A5gY/?mibextid=wwXIfr" target="_blank">📘 Facebook</a>
+    <a class="tb-link" href="admin.html">สำหรับเจียเต้าอั้น</a>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+
+<div class="drawer" id="drawer">
+  <div class="dr-av">♡ 𐙚</div>
+  <div class="dr-name">Jialie</div>
+  <nav class="dr-nav">
+    <a class="dr-a on" data-target="top"><span class="ico">𐙚</span><span>Home</span></a>
+    <a class="dr-a" data-target="services"><span class="ico">𐙚</span><span>บริการ</span></a>
+    <a class="dr-a" data-target="steps"><span class="ico">𐙚</span><span>ขั้นตอน</span></a>
+    <a class="dr-a" data-target="rules"><span class="ico">𐙚</span><span>กฎร้าน</span></a>
+    <a class="dr-a" data-target="contact"><span class="ico">𐙚</span><span>ติดต่อ</span></a>
+  </nav>
+</div>
+
+<div id="top">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-txt">
+        <div class="hero-tag" id="heroTag">☁️ รับทำป้าย & เว็บไซต์ต่างๆ</div>
+        <div class="hero-brand">
+          <div class="hero-logo" aria-hidden="true"><span>♡</span></div>
+          <div class="hero-title" id="heroTitle">Jiale Studio</div>
+        </div>
+        <div class="hero-sub" id="heroSub">私たちは看板製作とウェブサイト制作を行っています。</div>
+      </div>
+      <div class="hero-visual" aria-label="Main hero image card">
+        <div class="hero-photo-card">
+          <img src="https://img2.pic.in.th/726200945_122099654409362962_8558329955018340291_n.jpg" alt="Main hero image">
+          <div class="hero-photo-badge" id="heroPhotoBadge">ジア・リー </div>
+          <div class="hero-photo-caption" id="heroPhotoCaption">เจียเองฮับ</div>
+        </div>
+        <div class="hero-decor-row" aria-hidden="true">
+          <div class="hero-deco-btn">✦</div>
+          <div class="hero-deco-btn">◌</div>
+          <div class="hero-deco-btn">✧</div>
+          <div class="hero-deco-btn">◦</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave"></div>
+
+  <div class="content">
+    <div id="services">
+      <div class="sh"><span class="ico">🎨</span><h2 id="servicesTitle">คลิกดูได้ตามหมวดหมู่</h2><span id="servicesSub">— เพิ่มเติมสอบถามได้ค่ะ~</span></div>
+      <div class="cards">
+        <button class="card-link" type="button" onclick="openCategory('group-block')"><div class="card"><div class="c-ico">𐙚</div><div class="c-ttl">รวมกลุ่มบล็อคที่เจียมี ‧₊˚ </div><div class="c-dsc">คลิกเพื่อดูกลุ่มบล็อ<br>พร้อมภาพและลิงก์ไดรฟ์ 7+ ชิ้น</div></div></button>
+        <button class="card-link" type="button" onclick="openCategory('group-toon')"><div class="card"><div class="c-ico">˖ ࣪⊹</div><div class="c-ttl">กลุ่มตูน</div><div class="c-dsc">คลิกเพื่อดูสินค้าในหมวดตูน<br>พร้อมภาพและลิงก์ไดรฟ์ 7+ ชิ้น</div></div></button>
+        <button class="card-link" type="button" onclick="openCategory('group-decor')"><div class="card"><div class="c-ico">♡ </div><div class="c-ttl">ของตกแต่ง</div><div class="c-dsc">คลิกเพื่อดูสินค้าในหมวดตกแต่ง<br>พร้อมภาพและลิงก์ไดรฟ์ 7+ ชิ้น</div></div></button>
+      </div>
+    </div>
+
+    <div id="catalog" style="margin-bottom:18px;">
+      <div class="sh"><span class="ico">ෆ</span><h2 id="catalogTitle">หมวดหมู่ต่างๆ</h2><span id="catalogSub">— กดแต่ละหมวดเพื่อดูรายการได้เลย</span></div>
+      <div class="catalog-note" id="catalogNote">รวมทั้งหมด 48 รายการ แยกเป็น 3 หมวดหมู่ พร้อมภาพตัวอย่างและปุ่มเปิดลิงก์ไดรฟ์</div>
+      <div id="catalogMount"></div>
+    </div>
+
+    <div class="box">
+      <div class="box-label" id="serviceTimeTitle">ทุกกลุ่มรับผ่อนนะคะ</div>
+      <div class="badges">
+        <div class="badge b-n">⏱️ เปิดผ่อนไม่มีขั้นต่ำ</div>
+        <div class="badge b-u">⚡ ผ่อนครบดึงเข้ากลุ่ม</div>
+      </div>
+      <div class="note" id="serviceTimeNote">ยกเลิกไม่คืนเงินทุกกรณี</div>
+    </div>
+
+    <div id="steps" style="margin-bottom:18px;">
+      <div class="sh"><span class="ico">📋</span><h2 id="stepsTitle">ขั้นตอนการสั่งงาน</h2><span id="stepsSub">— ง่ายมากค่า</span></div>
+      <div class="box" style="margin-bottom:0;">
+        <div class="steps">
+          <div class="step"><div class="sn">1</div><div class="st" data-step="1"><strong>แจ้งรายละเอียดให้ชัดเจน</strong> เขียนรายละเอียดร้านค้าให้ครบถ้วน</div></div>
+          <div class="step"><div class="sn">2</div><div class="st" data-step="2">ใส่ลิงก์ <strong>ตัวอย่างงาน</strong> มาให้พร้อม หากมีโลโก้ให้แนบมาใส่ <strong>Google Drive</strong></div></div>
+          <div class="step"><div class="sn">3</div><div class="st" data-step="3"><strong>ชำระ 50% แรก</strong> ส่งงานให้เช็ค แจ้งยอดชำระ 50% ที่เหลือ</div></div>
+          <div class="step"><div class="sn">4</div><div class="st" data-step="4"><strong>รอรับลิงก์</strong> ได้เลยค่า~ ✨</div></div>
+        </div>
+      </div>
+    </div>
+
+    <a class="course" id="courseLink" href="https://m.facebook.com/story.php?story_fbid=pfbid0xcAVZ6reuMDd4D1BrnXcPxhrDu6hnZV4mTWD1DJ2mKr7BNuYSUDFWL86rniBMWXRl&id=61554192600355" target="_blank">
+      <div class="c-emj">📚</div>
+      <div class="c-inf">
+        <div class="c-inf-t" id="courseTitle">🌸 กลุ่มคอร์สสอนทำเว็บสไตล์พิ้งจู</div>
+        <div class="c-inf-d" id="courseDesc">สำหรับคนที่อยากทำเว็บขายด้วยตัวเอง อีกไม่กี่ที่ปิดถาวรน้า</div>
+      </div>
+      <div class="c-price" id="coursePrice">599 บาท<small id="coursePriceNote">ราคาปัจจุบัน</small></div>
+    </a>
+
+    <div id="rules">
+      <div class="sh"><span class="ico">📍</span><h2 id="rulesTitle">กฎของร้าน</h2><span id="rulesSub">— โปรดอ่านด้วยนะคะ</span></div>
+      <div class="rules-box">
+        <div class="rule"><span>⚠️</span><span data-rule="1">ถ้าโอนเงินแล้ว <strong style="color:var(--pk3)">ทางร้านไม่คืนเงินทุกกรณี</strong>นะคะ</span></div>
+        <div class="rule"><span>💸</span><span data-rule="2">หากยกเลิกงานหลังส่งบรีฟมาแล้ว หากงานเริ่มไปแล้วจะ<strong style="color:#ffe59a">คืนแค่ 50%</strong> ค่ะ</span></div>
+        <div class="rule"><span>🚫</span><span data-rule="3">หากยกเลิกหลังจากเช็คงาน = <strong style="color:var(--pk3)">ไม่คืน</strong> และส่งงานให้ตามปกติ</span></div>
+      </div>
+    </div>
+
+    <div class="warn"><span>⚠️</span><span id="warningText">ลูกค้าของทางร้านโปรดอ่านด้วยนะคะ จะได้เข้าใจตรงกันนะคะ</span></div>
+
+    <div>
+      <div class="sh"><span class="ico">⭐</span><h2 id="portfolioTitle">ตัวอย่างงาน</h2><span id="portfolioSub">— ดูเพิ่มเติมที่อัลบั้มเฟสได้เลยนะคะ</span></div>
+      <a class="port-link" id="portfolioLink" href="https://drive.google.com/drive/folders/173V-T3ArNaBuHYOGZanETxmBlhbUGbnk?usp=drive_link" target="_blank">
+        <span class="p-ico">˚♡˚₊</span>
+        <div class="p-txt"><div class="p-ttl" id="portfolioLinkText">ดูตัวอย่างงาน คลิ๊ก!</div><div class="p-url" id="portfolioLinkUrl">https://drive.google.com/drive/folders/173V-T3ArNaBuHYOGZanETxmBlhbUGbnk?usp=drive_link</div></div>
+        <span class="p-arr">→</span>
+      </a>
+    </div>
+
+    <div id="contact">
+      <div class="contact-box">
+        <div class="contact-hd"><span style="font-size:17px;">📱</span><h3 id="contactTitle">ช่องทางติดต่อ</h3></div>
+        <a class="ct-link" href="https://www.facebook.com/share/1D23M6A5gY/?mibextid=wwXIfr" target="_blank">
+          <div class="ct-ico" style="background:linear-gradient(135deg,#fff2a8,#8be0c6);">𐙚</div>
+          <div class="ct-inf"><div class="ct-t" id="contactFacebookTitle">Facebook : Jialie</div><div class="ct-u" id="contactFacebookUrl">facebook.com/profile.php?id=61554192600355</div></div>
+          <span class="ct-arr">→</span>
+        </a>
+        <a class="ct-link" href="https://line.me/ti/p/FZM7Ct3e7S" target="_blank">
+          <div class="ct-ico" style="background:linear-gradient(135deg,#fff3bd,#ffe07a);">𐙚</div>
+          <div class="ct-inf"><div class="ct-t" id="contactLineTitle">LINE : Jiajie</div><div class="ct-u" id="contactLineUrl">line.me/ti/p/LfBtdhlrVa</div></div>
+          <span class="ct-arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text" id="footerText">✦ JIALE STORE เจียยั้กยูกค้า</div>
+    <div class="ft-links">
+      <a class="ft-a" href="https://www.facebook.com/share/1D23M6A5gY/?mibextid=wwXIfr" target="_blank">📘 Facebook</a>
+      <a class="ft-a" href="https://line.me/ti/p/FZM7Ct3e7S" target="_blank">💚 LINE</a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script src="firebase-config.js"></script>
+<script type="module">
+  const fallbackCatalogData = {
+    block: [
+      {
+        name: 'Wishpop! 💖',
+        desc: 'เมนูตัวอย่างสำหรับเปิดดูหมวดบล็อค หากไฟล์ข้อมูลภายนอกโหลดไม่สำเร็จ ยังสามารถคลิกเข้าไปดูรายการได้ตามปกติ',
+        tag: 'promotion',
+        driveUrl: 'https://shorturl.asia/xBvmP',
+        imageUrl: 'https://img1.pic.in.th/images/723883624_122101043865362962_1332548229057146091_n.jpg',
+        price: '฿99',
+        accent: ['#ff9ac0', '#ff5d96']
+      },
+      {
+        name: 'MAGGIE THE SERIES',
+        desc: 'ตัวอย่างเมนูบล็อคอีกหนึ่งรายการสำหรับสำรองการแสดงผลบนหน้าเว็บ',
+        tag: 'MAGGIE THE SERIES',
+        driveUrl: 'https://drive.google.com/drive/folders/PUT-YOUR-BLOCK-2-ID-HERE?usp=sharing',
+        imageUrl: 'https://img2.pic.in.th/724113636_122101044411362962_4985665146417366003_n.jpg',
+        price: '฿199',
+        accent: ['#8ed1ff', '#5e8cff']
+      }
+    ],
+    toon: [
+      {
+        name: 'ตัวอย่างหมวดตูน',
+        desc: 'ใช้เป็นเมนูสำรองเมื่อข้อมูลจริงยังไม่พร้อมโหลด',
+        tag: 'toon',
+        driveUrl: 'https://drive.google.com/',
+        imageUrl: '',
+        price: '฿0',
+        accent: ['#c4a6ff', '#8d67ff']
+      }
+    ],
+    decor: [
+      {
+        name: 'ตัวอย่างของตกแต่ง',
+        desc: 'รายการสำรองสำหรับให้ปุ่มเมนูยังทำงานได้บนหน้าเผยแพร่',
+        tag: 'decor',
+        driveUrl: 'https://drive.google.com/',
+        imageUrl: '',
+        price: '฿0',
+        accent: ['#7fe4c2', '#2f9e7d']
+      }
+    ]
+  };
+
+  async function loadCatalogData() {
+    try {
+      const catalogUrl = new URL('./catalog-data.json', import.meta.url);
+      catalogUrl.searchParams.set('v', String(Date.now()));
+      const response = await fetch(catalogUrl.href, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to load catalog data: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.warn('Using embedded catalog fallback', error);
+      return fallbackCatalogData;
+    }
+  }
+
+  const catalogData = await loadCatalogData();
+
+  function svgDataUri(text, accentA, accentB) {
+    const safeText = String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="${accentA}"/>
+            <stop offset="100%" stop-color="${accentB}"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="480" fill="url(#g)"/>
+        <circle cx="100" cy="96" r="72" fill="rgba(255,255,255,0.18)"/>
+        <circle cx="548" cy="102" r="92" fill="rgba(255,255,255,0.12)"/>
+        <circle cx="520" cy="392" r="120" fill="rgba(255,255,255,0.1)"/>
+        <rect x="54" y="48" rx="28" ry="28" width="532" height="384" fill="rgba(10,5,16,0.22)" stroke="rgba(255,255,255,0.18)"/>
+        <text x="320" y="268" text-anchor="middle" font-size="34" font-weight="700" font-family="Arial, sans-serif" fill="#ffffff">${safeText}</text>
+        <text x="320" y="320" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" fill="rgba(255,255,255,0.86)">image preview</text>
+      </svg>`;
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+  }
+
+  const fallbackCategories = [
+    { id: 'group-block', key: 'block', title: 'รวมกลุ่มบล็อคที่เจียมี', count: '28 รายการ' },
+    { id: 'group-toon', key: 'toon', title: 'กลุ่มตูน', count: '5 รายการ' },
+    { id: 'group-decor', key: 'decor', title: 'ของตกแต่ง', count: '13 รายการ' },
+  ];
+
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderProductCard(item) {
+    const image = item.imageUrl || svgDataUri(item.tag || item.category || 'preview', item.accent?.[0] || '#cfe8e2', item.accent?.[1] || '#bfdde7');
+    const price = item.price || '฿0';
+    const name = escapeHtml(item.name || 'Untitled');
+    const desc = escapeHtml(item.desc || '');
+    const tag = escapeHtml(item.tag || '');
+    const driveUrl = escapeHtml(item.driveUrl || '#');
+    return `
+      <a class="product-card" href="${driveUrl}" target="_blank" rel="noopener noreferrer">
+        <div class="prod-thumb">
+          <img src="${image}" alt="${name}">
+          <span class="prod-chip">${tag}</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">${name}</div>
+          <div class="prod-price">${escapeHtml(price)}</div>
+          <div class="prod-desc">${desc}</div>
+          <div class="prod-foot">
+            <span class="prod-size">คลิกเพื่อดูตัวอย่าง</span>
+            <span class="prod-link"> Open n →</span>
+          </div>
+        </div>
+      </a>`;
+  }
+
+  function renderFallbackCatalog() {
+    const mount = document.getElementById('catalogMount');
+    if (!mount) return;
+    mount.innerHTML = fallbackCategories.map(section => {
+      const items = catalogData[section.key] || [];
+      const cards = items.map(renderProductCard).join('');
+      return `
+        <details class="category-shell" id="${section.id}">
+          <summary class="category-head"><div class="cat-meta"><h3>${section.title}</h3><span>${section.count}</span></div><span class="cat-arrow">›</span></summary>
+          <div class="category-body"><div class="product-grid" data-category="${section.key}">${cards}</div></div>
+        </details>`;
+    }).join('');
+  }
+
+  function openCategory(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    document.querySelectorAll('.category-shell').forEach(section => {
+      if (section !== target) section.open = false;
+    });
+    target.open = true;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.querySelectorAll('.category-shell summary').forEach(summary => {
+    summary.addEventListener('click', () => {
+      const parent = summary.parentElement;
+      setTimeout(() => {
+        if (parent && parent.open) {
+          document.querySelectorAll('.category-shell').forEach(section => {
+            if (section !== parent) section.open = false;
+          });
+        }
+      }, 0);
+    });
+  });
+
+  function toggleDrawer() {
+    const isOpen = document.getElementById('drawer').classList.contains('open');
+    isOpen ? closeDrawer() : openDrawer();
+  }
+  function openDrawer() {
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('overlay').classList.add('open');
+    document.getElementById('hamBtn').classList.add('open');
+  }
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+    document.getElementById('hamBtn').classList.remove('open');
+  }
+
+  window.openCategory = openCategory;
+  window.toggleDrawer = toggleDrawer;
+  window.openDrawer = openDrawer;
+  window.closeDrawer = closeDrawer;
+
+  document.querySelectorAll('.dr-a[data-target]').forEach(a => {
+    a.addEventListener('click', () => {
+      const id = a.dataset.target;
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 66;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+      document.querySelectorAll('.dr-a').forEach(n => n.classList.remove('on'));
+      a.classList.add('on');
+      setTimeout(closeDrawer, 120);
+    });
+  });
+
+  renderFallbackCatalog();
+  const P = document.getElementById('pts');
+  ['✦','★','♥','✿','◆','✧','♡','☆','◇','❋'].forEach(e => {
+    for (let j = 0; j < 2; j++) {
+      const d = document.createElement('div');
+      d.className = 'pt';
+      d.textContent = e;
+      d.style.cssText = `left:${Math.random()*100}vw;font-size:${8+Math.random()*8}px;color:${'#8be0c6,#eafcf5,#fff1ab,#ffffff'.split(',')[Math.floor(Math.random()*4)]};animation-duration:${10+Math.random()*13}s;animation-delay:${-Math.random()*25}s;`;
+      P.appendChild(d);
+    }
+  });
+</script>
+</body>
+</html>
