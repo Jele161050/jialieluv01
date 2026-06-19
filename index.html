@@ -487,11 +487,7 @@ border-radius: 30px;
 text-decoration: none; color: #21413b;
 box-shadow: 0 14px 30px rgba(126,143,145,0.08);
 transition: transform .22s, border-color .22s, box-shadow .22s;
-animation: floatGentle 7s ease-in-out infinite;
-will-change: transform;
 }
-.product-card:nth-child(3n+2) { animation-delay: -1.4s; }
-.product-card:nth-child(3n+3) { animation-delay: -2.8s; }
 .product-card:hover { transform: translateY(-4px) rotate(-0.2deg); border-color: rgba(191,221,231,0.92); box-shadow: 0 20px 34px rgba(126,143,145,0.12); }
 .prod-thumb {
 position: relative; aspect-ratio: 4 / 3; overflow: hidden;
@@ -875,7 +871,7 @@ window.CATALOG_DATA = {
       "desc": "บล็อคคิ้วนี้น่ารักใจเจ็บมากกก คือมันคิวท์เกินเบอร์ไปมากจริงๆ ค่ะ! ตกแต่งได้หลากหลาย เปลี่ยนแนวได้ไม่ซ้ำ!",
       "tag": " 💖promotion",
       "driveUrl": "https://shorturl.asia/xBvmP",
-      "imageUrl": "https://img1.pic.in.th/images/723883624_122101043865362962_8558329955018340291_n.jpg",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_559515804d60e8a9e1ff.jpeg",
       "price": "฿99",
       "accent": ["#ff9ac0", "#ff5d96"],
       "icon": "🧱"
@@ -1387,10 +1383,12 @@ window.CATALOG_DATA = {
     const desc = escapeHtml(item.desc || '');
     const tag = escapeHtml(item.tag || '');
     const driveUrl = escapeHtml(item.driveUrl || '#');
+    const fallbackImage = svgDataUri(item.name || item.tag || 'preview', item.accent?.[0] || '#cfe8e2', item.accent?.[1] || '#bfdde7');
+    const thumbStyle = ` style="background-image:url('${fallbackImage}'); background-size:cover; background-position:center;"`;
     return `
       <a class="product-card" href="${driveUrl}" target="_blank" rel="noopener noreferrer">
-        <div class="prod-thumb">
-          <img src="${image}" alt="${name}">
+        <div class="prod-thumb"${thumbStyle}>
+          <img src="${image}" alt="${name}" loading="${item.name === 'Wishpop! 💖' ? 'eager' : 'lazy'}" onerror="this.style.display='none'">
           <span class="prod-chip">${tag}</span>
         </div>
         <div class="prod-body">
@@ -1490,3 +1488,4 @@ window.CATALOG_DATA = {
 </script>
 </body>
 </html>
+
