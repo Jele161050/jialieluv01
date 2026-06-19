@@ -867,65 +867,479 @@ transition: all .2s;
 </div>
 
 <script src="firebase-config.js"></script>
-<script type="module">
-  const fallbackCatalogData = {
-    block: [
-      {
-        name: 'Wishpop! 💖',
-        desc: 'เมนูตัวอย่างสำหรับเปิดดูหมวดบล็อค หากไฟล์ข้อมูลภายนอกโหลดไม่สำเร็จ ยังสามารถคลิกเข้าไปดูรายการได้ตามปกติ',
-        tag: 'promotion',
-        driveUrl: 'https://shorturl.asia/xBvmP',
-        imageUrl: 'https://img1.pic.in.th/images/723883624_122101043865362962_1332548229057146091_n.jpg',
-        price: '฿99',
-        accent: ['#ff9ac0', '#ff5d96']
-      },
-      {
-        name: 'MAGGIE THE SERIES',
-        desc: 'ตัวอย่างเมนูบล็อคอีกหนึ่งรายการสำหรับสำรองการแสดงผลบนหน้าเว็บ',
-        tag: 'MAGGIE THE SERIES',
-        driveUrl: 'https://drive.google.com/drive/folders/PUT-YOUR-BLOCK-2-ID-HERE?usp=sharing',
-        imageUrl: 'https://img2.pic.in.th/724113636_122101044411362962_4985665146417366003_n.jpg',
-        price: '฿199',
-        accent: ['#8ed1ff', '#5e8cff']
-      }
-    ],
-    toon: [
-      {
-        name: 'ตัวอย่างหมวดตูน',
-        desc: 'ใช้เป็นเมนูสำรองเมื่อข้อมูลจริงยังไม่พร้อมโหลด',
-        tag: 'toon',
-        driveUrl: 'https://drive.google.com/',
-        imageUrl: '',
-        price: '฿0',
-        accent: ['#c4a6ff', '#8d67ff']
-      }
-    ],
-    decor: [
-      {
-        name: 'ตัวอย่างของตกแต่ง',
-        desc: 'รายการสำรองสำหรับให้ปุ่มเมนูยังทำงานได้บนหน้าเผยแพร่',
-        tag: 'decor',
-        driveUrl: 'https://drive.google.com/',
-        imageUrl: '',
-        price: '฿0',
-        accent: ['#7fe4c2', '#2f9e7d']
-      }
-    ]
-  };
-
-  async function loadCatalogData() {
-    try {
-      const catalogUrl = new URL('./catalog-data.json', import.meta.url);
-      catalogUrl.searchParams.set('v', String(Date.now()));
-      const response = await fetch(catalogUrl.href, { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error(`Failed to load catalog data: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.warn('Using embedded catalog fallback', error);
-      return fallbackCatalogData;
+<script>
+window.CATALOG_DATA = {
+  "block": [
+    {
+      "name": "Wishpop! 💖",
+      "desc": "บล็อคคิ้วนี้น่ารักใจเจ็บมากกก คือมันคิวท์เกินเบอร์ไปมากจริงๆ ค่ะ! ตกแต่งได้หลากหลาย เปลี่ยนแนวได้ไม่ซ้ำ!",
+      "tag": " 💖promotion",
+      "driveUrl": "https://shorturl.asia/xBvmP",
+      "imageUrl": "https://img1.pic.in.th/images/723883624_122101043865362962_8558329955018340291_n.jpg",
+      "price": "฿99",
+      "accent": ["#ff9ac0", "#ff5d96"],
+      "icon": "🧱"
+    },
+    {
+      "name": "MAGGIE THE SERIES ",
+      "desc": "กลุ่มบล็อกสุดจึ้ง เสิร์ฟความโซ๊ะ ความเก๋ แบบจัดเต็ม 🪽 พร้อมบล็อกให้ใช้งานแล้วถึง 51 บล็อก",
+      "tag": "MAGGIE THE SERIES",
+      "driveUrl": "https://drive.google.com/drive/folders/PUT-YOUR-BLOCK-2-ID-HERE?usp=sharing",
+      "imageUrl": "https://img2.pic.in.th/724113636_122101044411362962_4985665146417366003_n.jpg",
+      "price": "฿199",
+      "accent": ["#8ed1ff", "#5e8cff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Nighty Luxury",
+      "desc": "  ต้องไม่พลาด! กลุ่มบล็อกแนว Luxury ที่สวยตาแตกที่สุด ผลิตจากแอดกลุ่มโดยตรง (Sweet Pink) การันตีงานคุณภาพที่ไม่ซ้ำใครแน่นอน",
+      "tag": "Nighty Luxury",
+      "driveUrl": "https://shorturl.asia/A2rew",
+      "imageUrl": "https://img2.pic.in.th/723819910_122101044729362962_3969058909790331591_n.jpg",
+      "price": "฿199",
+      "accent": ["#ffd39a", "#ff9f5d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Sakura box🌸",
+      "desc": "กลุ่มบล็อกบัญชีล้วนมีทั้งงานเฉพาะและไม่เฉพาะอัพงานแล้ว15 เซ็ท แอดใจดีน่ารักไม่ทิ้งไม่เทกลุ่ม รออัพงานแถมแนวคุณนิวมากกว่า 10 ไฟล์ งานเฉพาะ",
+      "tag": "Sakura box🌸",
+      "driveUrl": "https://drive.google.com/.../1CEPNWX9ZoBjVqFfw9I7ySrn9tIQ...",
+      "imageUrl": "https://img1.pic.in.th/images/725319467_122101045899362962_6473559752806412233_n.jpg",
+      "price": "฿59",
+      "accent": ["#c4a6ff", "#8d67ff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "🍒𓈒  Group  Cherry  Block  𓈒🍒",
+      "desc": " บล็อกเฉพาะแนวคุณนิวล้วน ค่าเข้ากลุ่มเพียงแค่ 79.- เท่าน้าน ปัจจุบันอัพงานครบแล้ว 20 งาน",
+      "tag": "Cherry  Block",
+      "driveUrl": "https://drive.google.com/drive/folders/171dXveVqgWaPQcnR6v80yoYHfu82RpN7",
+      "imageUrl": "https://img2.pic.in.th/IMG_32065167efe83381355b.jpeg",
+      "price": "฿79",
+      "accent": ["#505b7c", "#18213f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "🍒 𓈒 Group Cherry Block Ver.3",
+      "desc": " บล็อกเฉพาะแนวคุณนิวล้วน ราคาเพียง 49 บาทเท่านั้นค้าบ ⭐ทยอยอัพงานให้ใช้ 15 - 20 บล็อก!!",
+      "tag": "🍒 𓈒 Group Cherry Block Ver.3",
+      "driveUrl": "https://drive.google.com/drive/folders/1cjINwZkH242BtFmTctYAgk27FtzUTr1g",
+      "imageUrl": "https://img2.pic.in.th/IMG_406471fc112b59836510.jpeg",
+      "price": "฿49",
+      "accent": ["#7fe4c2", "#2f9e7d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "🫐Choco Berry ",
+      "desc": "กลุ่มบล็อกเฉพาะ แต่งได้ทุกแนวงาน ไม่ว่าจะเรียบ  รก มืด หรือสว่างก็รอดหมด ทยอยอัพ 20 บล็อก แน่นอนว่ารีเควสได้ ชิ้นส่วนที่ใช้หลักๆเป็นงานคุณตี๋คั้บ มีงานของคุณตี๋ปะปนบางบล็อกด้วยค้าบ",
+      "tag": "🫐Choco Berry ",
+      "driveUrl": "https://drive.google.com/drive/folders/1lMAk2DRUmYSEZJiTIakXXeXf8Tx9pdi8",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_56173f9553228663b740.jpeg",
+      "price": "฿89",
+      "accent": ["#ffb86f", "#d95f5f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "𝑺𝒂𝒌𝒖𝒓𝒂𝒄𝒖𝒕𝒆 𝒗𝟐",
+      "desc": "กลุ่มบล็อกที่สามารถแต่งได้หลายแบบหลายสไตล์ 30 พิเศษแถมบล็อก Special ฉลองครบ80คน สามารถใช้ได้กันทุกคนน อัพบล็อกเฉพาะ อัพตัวตูน ของตกแต่งไม่เฉพาะอย่างละ50เซ็ต",
+      "tag": "𝑺𝒂𝒌𝒖𝒓𝒂𝒄𝒖𝒕𝒆 𝒗𝟐",
+      "driveUrl": "https://drive.google.com/drive/folders/PUT-YOUR-BLOCK-8-ID-HERE?usp=sharing",
+      "imageUrl": "https://img2.pic.in.th/IMG_3199ce4668fbd650e44d.jpeg",
+      "price": "฿69",
+      "accent": ["#8ed1ff", "#5e8cff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "NΞBULΛ•BØX",
+      "desc": "กลุ่มบล็อกสไตล์คุณนิวล้วน อัพงานครบแล้ว  20 บล็อก โปรพิเศษ!! สำหรับ 100 คนแรก ค่าเข้าเพียง 49 บาทเท่านั้น!!แอดมินดึงเมลไวมั้กกกกก ",
+      "tag": "NΞBULΛ•BØX",
+      "driveUrl": "https://drive.google.com/drive/folders/1qzhKnZ74alMyYpq8OwIiAjnJExooMURL",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_4063803685dbd6ecc15f.jpeg",
+      "price": "฿49",
+      "accent": ["#ffd39a", "#ff9f5d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Jelly Sweet Block 🐰🍮🫧",
+      "desc": "กลุ่มบล็อกเฉพาะกลุ่ม ใช้งานง่าย เหมาะสำหรับมือใหม่มากๆ อัพครบแล้ว 30 บล็อก  มีอัพแถมให้อีก เริ่ดเลยล่ะ ✨",
+      "tag": "Jelly Sweet Block 🐰🍮🫧",
+      "driveUrl": "https://drive.google.com/drive/folders/PUT-YOUR-BLOCK-10-ID-HERE?usp=sharing",
+      "imageUrl": "https://img2.pic.in.th/IMG_320112760d320c265fb4.jpeg",
+      "price": "฿79",
+      "accent": ["#c4a6ff", "#8d67ff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Cynthia˚꒰ ♡ ꒱⋆ .",
+      "desc": "กลุ่มบล็อคเฉพาะงานคุณนิวล้วน อัพครบแล้ว 40 บล็อค ♡ แอดมินดึงเมลไว",
+      "tag": "Cynthia˚꒰ ♡ ꒱⋆ .",
+      "driveUrl": "https://drive.google.com/drive/folders/1NKF1rmP_JM3Dj9JQJYZA_JTZZUz05N1O",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_3202.jpeg",
+      "price": "฿89",
+      "accent": ["#505b7c", "#18213f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Mumu Koralia Box",
+      "desc": "ทยอยอัพ 40+ บล็อกคับ งานคุณมิว/คุณชิโร่ และอาจมีอัพบล็อกเพิ่มค้าบ คุ้มมักๆๆ ดึงเมลไวทีสุด ไม่เข้าคืออดแยะ",
+      "tag": "Mumu Koralia Box",
+      "driveUrl": "https://drive.google.com/drive/folders/PUT-YOUR-BLOCK-12-ID-HERE?usp=sharing",
+      "imageUrl": "https://img2.pic.in.th/IMG_42382efea24b56147fa2.jpeg",
+      "price": "฿89",
+      "accent": ["#7fe4c2", "#2f9e7d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Brookies Sweet Box 🍥🤏🏻",
+      "desc": "สามารถแต่งได้หลากหลายแนว 🫟อัพถึง 20 บล็อก อัพงานครบแล้ว มีแถมแน่นอน รับรองว่าเข้าตอนนี้คุ้ม สามารถเปลี่ยนประเภทบล็อกได้ ",
+      "tag": "Brookies Sweet Box 🍥🤏🏻",
+      "driveUrl": "https://drive.google.com/drive/folders/1yNDOlKWdApplG9_fgemw0cL99pF8mWaW",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_3200.jpeg",
+      "price": "฿79",
+      "accent": ["#ffb86f", "#d95f5f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "☁️🖤Jamille Block V.2🖤☁️",
+      "desc": "กลุ่มบล็อกเฉพาะสุด Cute อัพสูงสุด 25 บล็อก (คนเยอะมีอัพเพิ่มแน่นอน) แต่งง่าย งานสวยแน่นอน💫",
+      "tag": "☁️🖤Jamille Block V.2🖤☁️",
+      "driveUrl": "https://drive.google.com/drive/folders/1eaMZGJDwaXpGYynSNQFU9ieHY55TlGjL",
+      "imageUrl": "https://img2.pic.in.th/IMG_320309e4f14b0f3b660f.jpeg      ",
+      "price": "฿89",
+      "accent": ["#8ed1ff", "#5e8cff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "🍒 MumuLand Box ⭐️",
+      "desc": "ทยอยอัพ 40+  บล็อกคับ งานคุณมิว/คุณชิโร่ และอาจมีอัพบล็อกเพิ่มค้าบ คุ้มมักๆๆ ดึงเมลไวทีสุด ไม่เข้าคืออดแยะ ",
+      "tag": "🍒 MumuLand Box ⭐️",
+      "driveUrl": "https://drive.google.com/drive/folders/1fhazJxxe0qMa-NdkSwlbdi81Vpg5lrMR",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_42446cf71277633c0510.jpeg",
+      "price": "฿89",
+      "accent": ["#ffd39a", "#ff9f5d"],
+      "icon": "🧱"
+    },
+    {
+      "name": " Selena Group",
+      "desc": " งานเฉพาะกลุ่ม บล็อกแก้ไข ไฟล์ ipv  มีเฉพาะกลุ่มนี้เท่านั้น อัพครบ 25 บล็อกแล้ว",
+      "tag": " Selena Group",
+      "driveUrl": "https://drive.google.com/drive/folders/1bKEkyKAcSqRTCARnDDOE5_GuU9fcJP_o",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_3208ab24597f0336451d.jpeg",
+      "price": "฿79",
+      "accent": ["#c4a6ff", "#8d67ff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Night garden block",
+      "desc": "กลุ่มบล็อกเฉพาะ แต่งได้ทั้งแนวมืดและสว่าง    ﾟอัพครบแล้วแต่มีอัพงานแถมน้า!  ﾟ   𓈒 มีเรทกรอบแถมให้ลูกกลุ่ม  ﾟ นีเควสงานได้แอดไม่ดุ",
+      "tag": "Night garden block",
+      "driveUrl": "https://drive.google.com/drive/folders/1Us91loehliSe-Mi5DgEiZOJUpR6-_8ff",
+      "imageUrl": "https://img2.pic.in.th/IMG_3220690868813025d800.jpeg",
+      "price": "฿99",
+      "accent": ["#505b7c", "#18213f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Caspia Blox 🪻",
+      "desc": "กลุ่มบล็อกแนวเรียบง่าย แนวมืดเฉพาะกลุ่ม เป็นเพียงแค่บล็อกป้าย มีภาพแต่งเป็นตัวอย่าง ไม่มีตูนตามป้ายให้นะคะ",
+      "tag": "Caspia Blox 🪻",
+      "driveUrl": "https://drive.google.com/drive/folders/1B-3saDvwkvSlBzGIWcM1MUUG_UQfy2I8",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_321780b9ff6a25f424ec.jpeg",
+      "price": "฿79",
+      "accent": ["#7fe4c2", "#2f9e7d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Lovely Box",
+      "desc": "กลุ่มบล็อกเฉพาะแนวมืด ค่าเข้า 69฿ ราคานี้แค่ 30 คนค่ะ!!อัพราคาเรื่อยๆนะคะ!! มีให้เลือกใช้ 15 บล็อก สามารถแต่งแนวสว่างได้ตามต้องการ แอดไม่เทกลุ่ม",
+      "tag": "Lovely Box",
+      "driveUrl": "https://drive.google.com/drive/folders/1wq0DuyhwjCr-yYyyj_86hEGcSPIDt96j",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_3223ad8b3ddd1212ccb0.jpeg",
+      "price": "฿69",
+      "accent": ["#ffb86f", "#d95f5f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "contton kitty box ♡ . ໒꒱",
+      "desc": "ตัวอย่างกลุ่มบล็อคเฉพาะ cotton kitty งานบล็อคน่ารัก หวานฟุ้งเต็มจอ แต่งง่ายไม่ยาก อัพงานทั้งหมด 20 บล็อค แอดมินอัพงานทุกสัปดาห์ พร้อมเสิร์ฟความคิวท์ด้วยการบอกพิกัดของที่แอดมินใช้ทั้งหมด หากอยากได้พิกัดเพิ่มเติมในบล็อคสามารถสอบถามได้เลยย",
+      "tag": "contton kitty box ♡ . ໒꒱",
+      "driveUrl": "https://drive.google.com/drive/folders/148eqPSi4LjvEneyOF6yOBusxBRGSn5bK",
+      "imageUrl": "https://img2.pic.in.th/IMG_5640ccd835ca6649b7af.jpeg",
+      "price": "฿59",
+      "accent": ["#8ed1ff", "#5e8cff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "LITTLE DUCK 🦢🎀",
+      "desc": "กลุ่มบล็อกเฉพาะสุดคิ้วอัพงานเรื่อยๆจนกว่าจะพอใจเข้ามาแล้วคุ้มแน่นอน รีบเข้าก่อนอัพราคาน้าาา 🐰🤍",
+      "tag": "LITTLE DUCK 🦢🎀",
+      "driveUrl": "https://drive.google.com/drive/folders/1WoyDSuaH6Uqm9BfptO4DlXrmI0VUuUgZ",
+      "imageUrl": "https://img2.pic.in.th/IMG_3209.jpeg",
+      "price": "฿59",
+      "accent": ["#ffd39a", "#ff9f5d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "  ♡ֹ𓂂݀    Hori parfait    🍦",
+      "desc": "กลุ่มׄบล็อกׄแนวׅขนׄมหวاׄนสุดคิ้ว  น่าׅรัก สีสันสׄdใส  อัพงاׅนถึง 35 งาน  ที่݁สำคัּญญอัพค݂݁รบแล้ว݂น้าา คุ้มมׄากไม่จัׅdไม่ได้แׅล้ว",
+      "tag": "  ♡ֹ𓂂݀    Hori parfait   🍦",
+      "driveUrl": "https://drive.google.com/drive/folders/105WBkft5rmnpgYVETpm4h-MFy3Im0ZrB",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_5641bbaa32376bc5074e.jpeg",
+      "price": "฿59",
+      "accent": ["#c4a6ff", "#8d67ff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "𝓙𝘶𝘱𝘪𝘵𝘦𝘳 𝘗𝘦𝘳𝘳𝘪𝘦 🐰⭐️",
+      "desc": "กลุ่มบล็อกเฉพาะ อัพ 15-20 บล็อกหากมีคนเข้าเรื่อยๆ ♡ มีอั𝓌 แถมแน่นอน",
+      "tag": "𝓙𝘶𝘱𝘪𝘵𝘦𝘳 𝘗𝘦𝘳𝘳𝘪𝘦 🐰⭐️",
+      "driveUrl": "https://drive.google.com/drive/folders/1T_lKHSalixxGvR6bonuiroQyD6jrdgRX",
+      "imageUrl": "https://img1.pic.in.th/images/--165a564aff7d6d9b.jpeg",
+      "price": "฿89",
+      "accent": ["#505b7c", "#18213f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "JaoMaiBox 🫧⭐️",
+      "desc": "กลุ่มบล็อกเฉพาะเเนวน่ารัก อัพ 25 บล็อกหากมีคนเข้าเรื่อยๆ ♡ อัพเเถมงับ",
+      "tag": "JaoMaiBox 🫧⭐️",
+      "driveUrl": "https://drive.google.com/drive/folders/1E1Ros2sTsRhxvP2uvR0ADLvShN76h-DZ",
+      "imageUrl": "https://img2.pic.in.th/JaoMaiBox-d36f23c0bba8b410.jpeg",
+      "price": "฿79",
+      "accent": ["#7fe4c2", "#2f9e7d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Stazia Group🧸",
+      "desc": "🍮 กลุ่มบล็อคเฉพาะแนวกึ่ง ADS  สไตล์คุณมิวล้วน อัพงานครบแล้ว 25 บล็อค มีอัพแถม บล็อคแนวฮิต แต่งง่าย  สนใจเข้ากับคนโพสได้เลยน้า 🫶🏻",
+      "tag": "Stazia Group🧸",
+      "driveUrl": "https://drive.google.com/drive/folders/16yZu3YIJtfIwvtyHsBaTc-zut--tC22E",
+      "imageUrl": "https://img1.pic.in.th/images/Stazia-Group.jpeg",
+      "price": "฿89",
+      "accent": ["#ffb86f", "#d95f5f"],
+      "icon": "🧱"
+    },
+    {
+      "name": "♡ Quiyomi 귀여운",
+      "desc": "กลุ่มบ้อคเฉพาะล้วน อัพงานถึง 60+ ม่ายเทกลุ่ม อัพงานบ่อยม้าก",
+      "tag": "♡ Quiyomi 귀여운",
+      "driveUrl": "[ http://bit.ly/43KmYkp ]",
+      "imageUrl": "https://img2.pic.in.th/Quiyomi---.jpeg",
+      "price": "฿59",
+      "accent": ["#8ed1ff", "#5e8cff"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Serabies box",
+      "desc": "อัพครบ 100 บล็อกแล้ว 🥨 อัพ special block เพิ่ม มีตูนและของตกแต่งให้เลือกใช้ มากกว่า 1500 ไฟล์ เหมาะสำหรับ Newbies งานป้ายสุดๆค่ะ!",
+      "tag": "Serabies box",
+      "driveUrl": "https://drive.google.com/drive/folders/18wz_Hx9Iik7YGXZK4nOi8i2z1IdcZOg6",
+      "imageUrl": "https://img2.pic.in.th/download234dd4fe622ea0fe.jpeg",
+      "price": "฿129",
+      "accent": ["#ffd39a", "#ff9f5d"],
+      "icon": "🧱"
+    },
+    {
+      "name": "Rosella by Wish",
+      "desc": "ในกลุ่มมีอะไรบ้าง? มาดูกันเลย! ✨ (loud volume) งานห้องเอฟยกกำลังจัดเต็ม / ของตกแต่งห้องวรัญแน่นๆ",
+      "tag": "Rosella by Wish",
+      "driveUrl": "[https://shorturl.asia/zVTa9] ",
+      "imageUrl": "https://img1.pic.in.th/images/download-12a58a1573619d5f7.jpeg",
+      "price": "฿129",
+      "accent": ["#c4a6ff", "#8d67ff"],
+      "icon": "🧱"
     }
+  ],
+  "toon": [
+    {
+      "name": "૮ ｡´   Ex.Kellynoir V.1",
+      "desc": "กลุ่มตูนลายเส้นคุณเคล ทำป้ายได้ง่าย ลายเส้นน่ารัก อย่าพลาดความน่ารักนี้เด็ดขาด (  🐰 )คืนทุนไวมาก อัพตูนทุกเดือน 🐈‍⬛ รีเควสธีมได้ตลอด",
+      "tag": "૮ ｡´   Ex.Kellynoir V.1",
+      "driveUrl": "https://drive.google.com/drive/folders/1ymzwaJGDlrMyp7JJB9kkJMl4bH8utyz7",
+      "imageUrl": "https://img2.pic.in.th/IMG_3198.jpeg",
+      "price": "฿269",
+      "accent": ["#fff2a8", "#8be0c6"],
+      "icon": "🎬"
+    },
+    {
+      "name": "Little Baby ",
+      "desc": "กลุ่มตูนจิบิเฉพาะลายเส้นคุณ Kelly Yo ทยอยอัพงาน 15-20 ตัว ตูนฮิต แต่งป้ายง่าย คืนทุนไวแน่นอน แอดมินดึงเมลไวสุดๆ🤏🏻",
+      "tag": "Little Baby ",
+      "driveUrl": "https://drive.google.com/drive/folders/1hiHUQv2oRy2SQCMefPAiKjR3iNjoPlyT",
+      "imageUrl": "https://img2.pic.in.th/IMG_31977fbd8381a3a1d535.jpeg",
+      "price": "฿159",
+      "accent": ["#eafcf5", "#fff1ab"],
+      "icon": "🎬"
+    },
+    {
+      "name": "Bunny Luxury 🐰",
+      "desc": "กลุ่มตูนเฉพาะกลุ่มสุดน่ารัก┊สไตล์ลูกคุณหนู อัพถึง 15 ตูน",
+      "tag": "Bunny Luxury 🐰",
+      "driveUrl": "https://drive.google.com/drive/folders/1kWq2HoQ30PLQA4OhKR_5qDSZvH_jIvUr",
+      "imageUrl": "https://img2.pic.in.th/IMG_3196dd73b602e6883516.jpeg",
+      "price": "฿99",
+      "accent": ["#f4fff9", "#bdf4e1"],
+      "icon": "🎬"
+    },
+    {
+      "name": "Neko bunbun 🍥🥕",
+      "desc": "กลุ่มตูนเฉพาะ การันตีความน่ารัก",
+      "tag": "Neko bunbun 🍥🥕",
+      "driveUrl": "https://drive.google.com/drive/folders/1BVsiRnZfEWm458xi4_GtMvNP9SvDTMSY",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_3225d1fdd422235f2553.jpeg",
+      "price": "฿89",
+      "accent": ["#fff3bd", "#ffd86b"],
+      "icon": "🎬"
+    },
+    {
+      "name": "Bunbun jiwjiw pewpew",
+      "desc": "กลุ่มตูนจิบิเฉพาะ อัพ 10 ตัว ใช้ง่ายคืนทุนไวมาก",
+      "tag": "Bunbun jiwjiw pewpew",
+      "driveUrl": "https://drive.google.com/drive/folders/13oAQZXed6CuJtZy2f0a84muhZCUm_wIN",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_5667085a1fd84a9bc2e7.jpeg",
+      "price": "฿119",
+      "accent": ["#eafcf5", "#fff2a8"],
+      "icon": "🎬"
+    }
+  ],
+  "decor": [
+    {
+      "name": "🌸 JELLY NELLY",
+      "desc": "กลุ่มของตกแต่งสุดน่ารักสั่งวาดเฉพาะกลุ่มถึง 20เซ็ทแอดมินดึงเมลไวภายใน24ชม .ของตกแต่งคุณภาพแต่งได้หลากหลาย สามารถรีเควสงานในกลุ่มได้ด้วยน้า✨",
+      "tag": "🌸 JELLY NELLY",
+      "driveUrl": "https://drive.google.com/drive/folders/1KXb33L7g0WjjtDNRdmAmJTqeAAFegOHW",
+      "imageUrl": "https://img2.pic.in.th/IMG_4263f0ccd4b6d7fc28e3.jpeg",
+      "price": "฿139",
+      "accent": ["#ff9fc3", "#d9558f"],
+      "icon": "🎀"
+    },
+    {
+      "name": "Tiny Stuff BY NANNIE🐰",
+      "desc": "เกลุ่มของตกแต่งชิ้นจิ๋ว เพิ่มความน่ารักให้กับงานป้ายของคุณ ปรับสีได้ตามใจชอบ งานเฉพาะกลุ่ม อัพ 20 เซต อัพงานครบแล้ว",
+      "tag": "Tiny Stuff BY NANNIE🐰",
+      "driveUrl": "https://drive.google.com/drive/folders/143kSXFhJ9ymd5Wayxt0XPryHHP5fK6W4",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_4261c96f60e7aa8199d4.jpeg",
+      "price": "฿159",
+      "accent": ["#ffdb74", "#f5a623"],
+      "icon": "🎀"
+    },
+    {
+      "name": "🌈Choco Rainbow",
+      "desc": "กลุ่มของตกแต่งเฉพาะสุดพรีเมียม สไตล์คุณฮาวคิ้ว รับประกันความคุ้ม เน้นโทนสีแปลกเพื่อลดปัญหา หาโทนสีให้เข้ากับตูนยากให้กับคุณอัพงานทั้งหมด 20 เซตจุกๆ ‼️อ๋า หมดปัญหาแอดมินเทกลุ่ม ไม่อัพงาน ชียูคนนี้เลยเหมาจ่ายงานทั้งหมดไปเรียบร้อยค้าบ งานเสร็จเมื่อไรอัพให้เมื่อนั้นเยย🫶🏻✨",
+      "tag": "🌈Choco Rainbow",
+      "driveUrl": "https://drive.google.com/drive/folders/11WO7A8Dg4UaBzqUHETgeiMpXQP63Ypj0",
+      "imageUrl": "https://img2.pic.in.th/IMG_565229e5b8f9860bc0f0.jpeg",
+      "price": "฿69",
+      "accent": ["#79d7ff", "#4c84ff"],
+      "icon": "🎀"
+    },
+    {
+      "name": "💓Fomu pink group💓",
+      "desc": "กลุ่มกรอบเพชร พร้อมของตกแต่งเฉพาะ อัพสูงสุดถึง 20เช็ต มีอัพของเสริมจำพวกไอคอนแอพ ไอเท็มเกม แอดมินรับประกันความน่ารัก",
+      "tag": "💓Fomu pink group💓",
+      "driveUrl": "https://drive.google.com/drive/folders/1-29hrx9OOGMx4HWjdcih-c7N6GwaudOB",
+      "imageUrl": "https://img2.pic.in.th/IMG_4271bd2713888ff058cc.jpeg",
+      "price": "฿159",
+      "accent": ["#c19cff", "#865bff"],
+      "icon": "🎀"
+    },
+    {
+      "name": "🫧Fukura pink 🫧",
+      "desc": "กลุ่มตุ้งติ้ง 2025 แบบใหม่แบบสับ ทำป้ายง่ายมาก แอดมินทำตัวอย่างให้ดู สามารถทำตามได้ เหมาะสำหรับแม่ค้าป้ายมือใหม่ ทำแล้วสวยน่ารัก คืนทุนไวแน่นอน",
+      "tag": "🫧Fukura pink 🫧",
+      "driveUrl": "https://shorturl.asia/ed6LP",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_4266ef1fb3a090074f6f.jpeg",
+      "price": "฿199",
+      "accent": ["#8ef0c8", "#3cbf86"],
+      "icon": "🎀"
+    },
+    {
+      "name": "Effect luxury",
+      "desc": "เอฟเฟคสุดปัง อัพ15แบบ สวยหรูมีสไตล์",
+      "tag": "Effect luxury",
+      "driveUrl": "https://drive.google.com/drive/folders/1_yHwtnvJjKrRtW_D3dRpQzM9Q_NrCyUj",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_4281ec50089a03abf392.jpeg",
+      "price": "฿119",
+      "accent": ["#ff9a7b", "#ff5e6f"],
+      "icon": "🎀"
+    },
+    {
+      "name": "กาลครั้งหนึ่ง Nesta & Nannie🐰🐳",
+      "desc": "กลุ่มพื้นหลังเฉพาะกลุ่ม ใช้ตกแต่งประกอบพื้นหลังงานป้าย มีไฟล์แยกชิ้น ปรับโทนสีได้ตามต้องการ ทยอยอัพ 15 เซต",
+      "tag": "กาลครั้งหนึ่ง Nesta & Nannie🐰🐳",
+      "driveUrl": "https://drive.google.com/drive/folders/1rFWFKbanW-sE4K0ftBfAM42vg9dOT26q",
+      "imageUrl": "https://img2.pic.in.th/IMG_56561dc911a1ad28261f.jpeg",
+      "price": "฿129",
+      "accent": ["#ffb875", "#b96d2a"],
+      "icon": "🎀"
+    },
+    {
+      "name": "Frame Luxury",
+      "desc": " งานพรีเมียมระดับตัวแม่: รวมกรอบเพชรสุดอลังการจาก (Sweet Pink) งานละเอียด วิ้งวับทุกลูกเล่น คุ้มเกินต้าน: การันตีอัปเดตงานให้ถึง 15 เซตใหญ่! ตกเซตละไม่กี่บาท แก้ไขได้ดั่งใจ: ทุกไฟล์มาพร้อม ไฟล์ที่สามารถแก้ไขได้ จะปรับสี ปรับแต่งแค่ไหนก็ทำได้อิสระ",
+      "tag": "Frame Luxury",
+      "driveUrl": "https://shorturl.asia/TJGau",
+      "imageUrl": "https://img2.pic.in.th/IMG_426870016f0c1a250a79.jpeg",
+      "price": "฿129",
+      "accent": ["#ff9fc3", "#d9558f"],
+      "icon": "🎀"
+    },
+    {
+      "name": "🍫Chocolate",
+      "desc": "กลุ่มของตกแต่งเฉพาะสุดคิ้วทึ ลงสีโดยพี่ทิพย์ อัพทั้งหมด 20 เซต รีเควสโทนสีที่ต้องการได้",
+      "tag": "🍫Chocolate",
+      "driveUrl": "https://drive.google.com/drive/folders/1al32yYiZHCTYWObHus-z_oao-6L6AwKA",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_4262.jpeg",
+      "price": "฿99",
+      "accent": ["#ffdb74", "#f5a623"],
+      "icon": "🎀"
+    },
+    {
+      "name": "fukura pink v.2",
+      "desc": "กลุ่มตุ้งติ้ง2025v.2 ตุ้งติ้ง บน-ล่าง ขนาด9:18 แนวนอน มีไฟล์แก้ไขสำหรับเปลี่ยนสี อัพงานทั้งหมด15-20 เชต มีรีเควสงานได้ แอดมินไม่เทแน่นอน!! กลุ่มแรกอัพครบแล้ว‼️",
+      "tag": "fukura pink v.2",
+      "driveUrl": "https://drive.google.com/drive/folders/1uuaZbBomQrGA8Mt6id-FjQIC8OCMD26m",
+      "imageUrl": "https://img2.pic.in.th/IMG_427045074117d8ea1d13.jpeg",
+      "price": "฿99",
+      "accent": ["#79d7ff", "#4c84ff"],
+      "icon": "🎀"
+    },
+    {
+      "name": "Jaofurpuffin",
+      "desc": "♡  ݁ o̴̶̷̥᷅  ̫ < 々Group݁ กลุ่มของตกแต่ง╺ น้องแมว up 15 set   ครบแล่ว",
+      "tag": "Jaofurpuffin",
+      "driveUrl": "https://drive.google.com/drive/folders/1nF6wBIBv6Qk2Re2NwIHT6AlCRNF_05KY",
+      "imageUrl": "https://img2.pic.in.th/IMG_5660425918dd382dfc1a.jpeg",
+      "price": "฿59",
+      "accent": ["#c19cff", "#865bff"],
+      "icon": "🎀"
+    },
+    {
+      "name": "Gummy blossom 🌸",
+      "desc": "📍อัพงานครบแล้ว กลุ่มของตกแต่งเฉพาะ ”ลายเส้นชาเมล แอดวาดเองทุกชิ้นไม่มีลายเส้น อัพงานให้ใช้ 15 เซ็ท ไม่รวมแถม",
+      "tag": "Gummy blossom 🌸",
+      "driveUrl": "https://drive.google.com/drive/folders/10Mtl1E5XgTrFUw0m-hKCsaCBwzlj_N6j",
+      "imageUrl": "https://img1.pic.in.th/images/IMG_426526aa58ce2124d7a3.jpeg",
+      "price": "฿79",
+      "accent": ["#8ef0c8", "#3cbf86"],
+      "icon": "🎀"
+    },
+    {
+      "name": "⁺◟🍡 ₊ 𝐜𝐚𝐧𝐝𝐲 𝐦𝐞𝐥𝐥𝐨 ₊˚ ",
+      "desc": "ลุ่มของตกแต่งแนวทับเส้น สีสันสดใสฟรุ้งฟริ้ง ✦ อัพงานจุกๆ กว่า 50 เซ็ต (ตอนนี้อัพครบแล้วน้า!)",
+      "tag": "⁺◟🍡 ₊ 𝐜𝐚𝐧𝐝𝐲 𝐦𝐞𝐥𝐥𝐨 ₊",
+      "driveUrl": "https://drive.google.com/drive/folders/12rB2_D6d6p-AfpmeI3Nt9-pIarfMt8x2",
+      "imageUrl": "https://img1.pic.in.th/images/-81b8ae2576463cdc.jpeg",
+      "price": "฿49",
+      "accent": ["#ff9a7b", "#ff5e6f"],
+      "icon": "🎀"
+    }
+  ]
+};
+</script>
+<script type="module">
+  async function loadCatalogData() {
+    return window.CATALOG_DATA || {};
   }
 
   const catalogData = await loadCatalogData();
